@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.OpeUserInfoDao">  
+    
+    <resultMap type="OpeUserInfo" id="OpeUserInfoResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="userId" column="user_id"/>
+		<result 	property="email" column="email"/>
+		<result 	property="carNo" column="car_no"/>
+		<result 	property="code" column="code"/>
+		<result 	property="carId" column="car_id"/>
+		<result 	property="appType" column="app_type"/>
+		<result 	property="hardVersion" column="hard_version"/>
+		<result 	property="carType" column="car_type"/>
+		<result 	property="pailiang" column="pailiang"/>
+		<result 	property="oilType" column="oil_type"/>
+		<result 	property="userCreateDate" column="user_create_date"/>
+		<result 	property="deviceState" column="device_state"/>
+		<result 	property="deviceCreateDate" column="device_create_date"/>
+		<result 	property="liveness" column="liveness"/>
+		<result 	property="typeNianjian" column="type_nianjian"/>
+		<result 	property="typeWeizhang" column="type_weizhang"/>
+		<result 	property="typeGuzhang" column="type_guzhang"/>
+		<result 	property="typeBaoyang" column="type_baoyang"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="OpeUserInfo" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ope_user_info WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="OpeUserInfo" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ope_user_info WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="OpeUserInfo" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ope_user_info WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="OpeUserInfo" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM ope_user_info WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM ope_user_info WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="OpeUserInfo" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ope_user_info        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="OpeUserInfo" resultMap="OpeUserInfoResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM ope_user_info WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM ope_user_info WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="OpeUserInfo">
+    	<![CDATA[ 
+    		INSERT INTO ope_user_info(user_id,email,car_no,code,car_id,app_type,hard_version,car_type,pailiang,oil_type,user_create_date,device_state,device_create_date,liveness,type_nianjian,type_weizhang,type_guzhang,type_baoyang) VALUES (#{userId},#{email},#{carNo},#{code},#{carId},#{appType},#{hardVersion},#{carType},#{pailiang},#{oilType},#{userCreateDate},#{deviceState},#{deviceCreateDate},#{liveness},#{typeNianjian},#{typeWeizhang},#{typeGuzhang},#{typeBaoyang})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE ope_user_info SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="OpeUserInfo">
+		<![CDATA[ 
+			UPDATE ope_user_info SET user_id = #{userId},email = #{email},car_no = #{carNo},code = #{code},car_id = #{carId},app_type = #{appType},hard_version = #{hardVersion},car_type = #{carType},pailiang = #{pailiang},oil_type = #{oilType},user_create_date = #{userCreateDate},device_state = #{deviceState},device_create_date = #{deviceCreateDate},liveness = #{liveness},type_nianjian = #{typeNianjian},type_weizhang = #{typeWeizhang},type_guzhang = #{typeGuzhang},type_baoyang = #{typeBaoyang} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="OpeUserInfo">
+		<![CDATA[ 
+    		DELETE FROM ope_user_info WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM ope_user_info WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM ope_user_info WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

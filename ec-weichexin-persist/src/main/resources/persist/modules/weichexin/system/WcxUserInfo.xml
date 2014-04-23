@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.WcxUserInfoDao">  
+    
+    <resultMap type="WcxUserInfo" id="WcxUserInfoResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="openId" column="open_id"/>
+		<result 	property="subscribe" column="subscribe"/>
+		<result 	property="nickname" column="nickname"/>
+		<result 	property="sex" column="sex"/>
+		<result 	property="language" column="language"/>
+		<result 	property="city" column="city"/>
+		<result 	property="province" column="province"/>
+		<result 	property="country" column="country"/>
+		<result 	property="subscribeTime" column="subscribe_time"/>
+		<result 	property="unsubscribeTime" column="unsubscribe_time"/>
+		<result 	property="headImageUrl" column="head_image_url"/>
+		<result 	property="orgCode" column="org_code"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="WcxUserInfo" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_user_info WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="WcxUserInfo" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_user_info WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="WcxUserInfo" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_user_info WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WcxUserInfo" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM wcx_user_info WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM wcx_user_info WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="WcxUserInfo" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_user_info        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WcxUserInfo" resultMap="WcxUserInfoResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM wcx_user_info WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM wcx_user_info WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="WcxUserInfo">
+    	<![CDATA[ 
+    		INSERT INTO wcx_user_info(open_id,subscribe,nickname,sex,language,city,province,country,subscribe_time,unsubscribe_time,head_image_url,org_code) VALUES (#{openId},#{subscribe},#{nickname},#{sex},#{language},#{city},#{province},#{country},#{subscribeTime},#{unsubscribeTime},#{headImageUrl},#{orgCode})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE wcx_user_info SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="WcxUserInfo">
+		<![CDATA[ 
+			UPDATE wcx_user_info SET open_id = #{openId},subscribe = #{subscribe},nickname = #{nickname},sex = #{sex},language = #{language},city = #{city},province = #{province},country = #{country},subscribe_time = #{subscribeTime},unsubscribe_time = #{unsubscribeTime},head_image_url = #{headImageUrl},org_code = #{orgCode} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="WcxUserInfo">
+		<![CDATA[ 
+    		DELETE FROM wcx_user_info WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM wcx_user_info WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM wcx_user_info WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

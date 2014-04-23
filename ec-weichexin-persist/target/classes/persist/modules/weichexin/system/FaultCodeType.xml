@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.FaultCodeTypeDao">  
+    
+    <resultMap type="FaultCodeType" id="FaultCodeTypeResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="message" column="message"/>
+		<result 	property="isdisabled" column="isdisabled"/>
+		<result 	property="updateTime" column="update_time"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="FaultCodeType" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code_type WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="FaultCodeType" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code_type WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="FaultCodeType" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code_type WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FaultCodeType" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM fault_code_type WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM fault_code_type WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="FaultCodeType" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code_type        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FaultCodeType" resultMap="FaultCodeTypeResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM fault_code_type WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM fault_code_type WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="FaultCodeType">
+    	<![CDATA[ 
+    		INSERT INTO fault_code_type(name,message,isdisabled,update_time) VALUES (#{name},#{message},#{isdisabled},#{updateTime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE fault_code_type SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="FaultCodeType">
+		<![CDATA[ 
+			UPDATE fault_code_type SET name = #{name},message = #{message},isdisabled = #{isdisabled},update_time = #{updateTime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="FaultCodeType">
+		<![CDATA[ 
+    		DELETE FROM fault_code_type WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM fault_code_type WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM fault_code_type WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

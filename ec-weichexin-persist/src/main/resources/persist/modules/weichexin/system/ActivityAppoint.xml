@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.ActivityAppointDao">  
+    
+    <resultMap type="ActivityAppoint" id="ActivityAppointResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="orgId" column="org_id"/>
+		<result 	property="openId" column="open_id"/>
+		<result 	property="activityId" column="activity_id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="telNo" column="tel_no"/>
+		<result 	property="comment" column="comment"/>
+		<result 	property="cancelTime" column="cancel_time"/>
+		<result 	property="cancelDesc" column="cancel_desc"/>
+		<result 	property="requestTime" column="request_time"/>
+		<result 	property="confirmTime" column="confirm_time"/>
+		<result 	property="confirmUserId" column="confirm_user_id"/>
+		<result 	property="confirmDesc" column="confirm_desc"/>
+		<result 	property="status" column="status"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="ActivityAppoint" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_appoint WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="ActivityAppoint" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_appoint WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="ActivityAppoint" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_appoint WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ActivityAppoint" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM activity_appoint WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM activity_appoint WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="ActivityAppoint" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_appoint        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ActivityAppoint" resultMap="ActivityAppointResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM activity_appoint WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM activity_appoint WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="ActivityAppoint">
+    	<![CDATA[ 
+    		INSERT INTO activity_appoint(org_id,open_id,activity_id,name,tel_no,comment,cancel_time,cancel_desc,request_time,confirm_time,confirm_user_id,confirm_desc,status) VALUES (#{orgId},#{openId},#{activityId},#{name},#{telNo},#{comment},#{cancelTime},#{cancelDesc},#{requestTime},#{confirmTime},#{confirmUserId},#{confirmDesc},#{status})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE activity_appoint SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="ActivityAppoint">
+		<![CDATA[ 
+			UPDATE activity_appoint SET org_id = #{orgId},open_id = #{openId},activity_id = #{activityId},name = #{name},tel_no = #{telNo},comment = #{comment},cancel_time = #{cancelTime},cancel_desc = #{cancelDesc},request_time = #{requestTime},confirm_time = #{confirmTime},confirm_user_id = #{confirmUserId},confirm_desc = #{confirmDesc},status = #{status} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="ActivityAppoint">
+		<![CDATA[ 
+    		DELETE FROM activity_appoint WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM activity_appoint WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM activity_appoint WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

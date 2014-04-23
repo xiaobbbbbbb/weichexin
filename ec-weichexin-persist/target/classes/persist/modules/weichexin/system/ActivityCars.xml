@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.ActivityCarsDao">  
+    
+    <resultMap type="ActivityCars" id="ActivityCarsResultMap">  
+		<id 		property="activityId" column="activity_id"/>
+		<id 		property="carId" column="car_id"/>
+		<result 	property="orgId" column="org_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="ActivityCars" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_cars WHERE car_id = #{carId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="ActivityCars" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_cars WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="ActivityCars" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_cars WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ActivityCars" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM activity_cars WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM activity_cars WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="ActivityCars" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM activity_cars        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ActivityCars" resultMap="ActivityCarsResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM activity_cars WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(car_id) FROM activity_cars WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="ActivityCars">
+    	<![CDATA[ 
+    		INSERT INTO activity_cars(activity_id,car_id,org_id) VALUES (#{activityId},#{carId},#{orgId})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE activity_cars SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="ActivityCars">
+		<![CDATA[ 
+			UPDATE activity_cars SET activity_id = #{activityId},car_id = #{carId},org_id = #{orgId} WHERE car_id = #{carId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="ActivityCars">
+		<![CDATA[ 
+    		DELETE FROM activity_cars WHERE car_id = #{carId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM activity_cars WHERE car_id = #{carId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM activity_cars WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

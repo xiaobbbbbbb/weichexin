@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.CarModelYouhuiDao">  
+    
+    <resultMap type="CarModelYouhui" id="CarModelYouhuiResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="orgId" column="org_id"/>
+		<result 	property="modelId" column="model_id"/>
+		<result 	property="btime" column="btime"/>
+		<result 	property="etime" column="etime"/>
+		<result 	property="hasGift" column="has_gift"/>
+		<result 	property="comment" column="comment"/>
+		<result 	property="pubTime" column="pub_time"/>
+		<result 	property="checkTime" column="check_time"/>
+		<result 	property="discardTime" column="discard_time"/>
+		<result 	property="checkComment" column="check_comment"/>
+		<result 	property="discardComment" column="discard_comment"/>
+		<result 	property="pubUserId" column="pub_user_id"/>
+		<result 	property="checkUserId" column="check_user_id"/>
+		<result 	property="discardUserId" column="discard_user_id"/>
+		<result 	property="status" column="status"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="CarModelYouhui" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_model_youhui WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="CarModelYouhui" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_model_youhui WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="CarModelYouhui" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_model_youhui WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="CarModelYouhui" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM car_model_youhui WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM car_model_youhui WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="CarModelYouhui" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_model_youhui        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="CarModelYouhui" resultMap="CarModelYouhuiResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM car_model_youhui WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM car_model_youhui WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="CarModelYouhui">
+    	<![CDATA[ 
+    		INSERT INTO car_model_youhui(org_id,model_id,btime,etime,has_gift,comment,pub_time,check_time,discard_time,check_comment,discard_comment,pub_user_id,check_user_id,discard_user_id,status) VALUES (#{orgId},#{modelId},#{btime},#{etime},#{hasGift},#{comment},#{pubTime},#{checkTime},#{discardTime},#{checkComment},#{discardComment},#{pubUserId},#{checkUserId},#{discardUserId},#{status})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE car_model_youhui SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="CarModelYouhui">
+		<![CDATA[ 
+			UPDATE car_model_youhui SET org_id = #{orgId},model_id = #{modelId},btime = #{btime},etime = #{etime},has_gift = #{hasGift},comment = #{comment},pub_time = #{pubTime},check_time = #{checkTime},discard_time = #{discardTime},check_comment = #{checkComment},discard_comment = #{discardComment},pub_user_id = #{pubUserId},check_user_id = #{checkUserId},discard_user_id = #{discardUserId},status = #{status} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="CarModelYouhui">
+		<![CDATA[ 
+    		DELETE FROM car_model_youhui WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM car_model_youhui WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM car_model_youhui WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

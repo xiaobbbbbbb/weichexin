@@ -1,0 +1,192 @@
+body {
+        padding: 0;
+        margin: 0;
+}
+
+body,html{
+        height: 100%;
+} 
+
+input:-webkit-autofill {
+    background-color: transparent !important;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+}
+
+input[type="text"], input[type="password"], textarea {
+outline-style: none;
+-webkit-appearance: none;
+
+-webkit-box-shadow: 0 0 white;
+-moz-box-shadow: 0 0 #fff;
+box-shadow: 0 0 white;
+}
+
+*:focus { outline: none; }
+
+table, tr, td {
+	padding:0px;
+	margin:0px;
+}
+.container {
+	width: 100%; /*装饰*/
+	height: 100%;
+	background: #f6f6f6;
+	border: 1px solid #CCC;
+	position: relative;
+}
+
+.left {
+	background-image: url("/static/images/login.png");
+	background-position: 0 0;
+	width: 427px;
+	height: 260px;
+}
+
+.right {
+	width: 270px;
+	margin-left:38px;
+	position: relative;
+}
+
+.loginIco {
+	display: block;
+	position:absolute;
+	left:19px;
+	top:10px;
+	z-index:500;
+	width:20px;
+	height:20px;	
+	background-image: url("/static/images/login.png");
+	background-position: -432px -20px
+}
+
+.passwordIco {
+	background-position: -432px -47px	
+}
+.loginBtn{
+	width:172px;
+	height: 20px;
+    padding: 10px 0px;
+    font-size: 12px;
+    
+	line-height:20px; /*ie7 8 输入居中*/
+	margin-left:50px;
+	padding-left:20px;
+	border-top-width: 0px;   /*一定要写，否则ie会显示出文本框默认的边框*/
+	 border-right-width: 0px;
+	 border-bottom-width: 0px;
+	 border-left-width: 0px;
+	 border-top-style: none;
+	 border-right-style: none;
+	 border-bottom-style: none;
+	 border-left-style: none;
+	 color:#999;
+	 text-align:left;
+	 position:absolute;
+	 left:0px;
+	 top:0px;
+}
+
+.loginBtn:focus{
+	color:white;
+}
+.loginBtnDiv {
+	background-image: url("/static/images/login.png");
+	background-position: -458px -17px;
+	background-repeat:no-repeat;
+	margin-top:10px;
+	height:41px;
+	border:none;
+	position: relative;
+}
+
+.checkCodeDiv {
+	background-image: url("/static/images/login.png");
+	background-position: -458px -65px;
+	height:42px;
+	margin-top:10px;
+	background-repeat:no-repeat;
+	position: relative;
+}
+
+.checkCodeDiv .checkInput {
+	background-color:transparent;border:0px;
+	height: 20px;
+    padding: 10px 0px;
+    font-size: 12px;
+	line-height:20px; /*ie7 8 输入居中*/
+	width: 106px;
+	padding-left:20px;
+	text-align:left;
+	position:absolute;
+	 left:0px;
+	 top:0px;
+}
+
+.checkCodeDiv .checkCode {
+	background-color:transparent;border:0px;
+	width:115px;
+	height:40px;
+	line-height:40px; /*ie7 8 输入居中*/
+	color:#999;
+	font-weight: bold;
+	font-size:16px;
+	padding:0px;
+	text-align:center;
+	letter-spacing: 5px;
+	position:absolute;
+	 left:130px;
+	 top:0px;
+	cursor: pointer;
+}
+
+.submitDiv {
+	margin-top:10px;
+	margin-bottom:35px;
+	margin-left:0px;
+	text-align: left; /*ie怎么是默认align：center;*/
+}
+.submitBtn {
+	display:block;
+	background-image: url("/static/images/login.png");
+	background-position: -460px -113px;
+	background-repeat:no-repeat;
+	width:242px;
+	height: 44px;
+	
+	border:0px;
+	
+	border-top-width: 0px;   /*一定要写，否则ie会显示出文本框默认的边框*/
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	padding:0px;
+	color:white;
+}
+
+.submitBtn:HOVER {
+		background-position: -460px -162px;
+}
+
+.submitBtn:ACTIVE {
+		background-position: -460px -214px;
+}
+
+.footer {
+	padding:0px;
+	margin:0px;
+	position:absolute;
+	bottom:0px;
+	right:0px;
+	width:320px;
+	height:22px;
+	background-image: url("/static/images/login.png");
+	background-position: -26px -263px;
+	background-repeat: no-repeat;
+}

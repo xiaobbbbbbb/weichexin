@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.CarTipDao">  
+    
+    <resultMap type="CarTip" id="CarTipResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="title" column="title"/>
+		<result 	property="content" column="content"/>
+		<result 	property="categoryId" column="category_id"/>
+		<result 	property="image" column="image"/>
+		<result 	property="orgId" column="org_id"/>
+		<result 	property="orgCode" column="org_code"/>
+		<result 	property="groupId" column="group_id"/>
+		<result 	property="ctime" column="ctime"/>
+		<result 	property="status" column="status"/>
+		<result 	property="cuserId" column="cuser_id"/>
+		<result 	property="auserId" column="auser_id"/>
+		<result 	property="checktime" column="checktime"/>
+		<result 	property="checkReason" column="check_reason"/>
+		<result 	property="clickNum" column="click_num"/>
+		<result 	property="pushNum" column="push_num"/>
+		<result 	property="auserName" column="auser_name"/>
+		<result 	property="cuserName" column="cuser_name"/>
+		<result 	property="publishCriterias" column="publish_criterias"/>
+		<result 	property="discardUserId" column="discard_user_id"/>
+		<result 	property="discardTime" column="discard_time"/>
+		<result 	property="wcxClickNums" column="wcx_click_nums"/>
+		<result 	property="publishChannel" column="publish_channel"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="CarTip" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_tip WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="CarTip" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_tip WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="CarTip" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_tip WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="CarTip" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM car_tip WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM car_tip WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="CarTip" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_tip        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="CarTip" resultMap="CarTipResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM car_tip WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM car_tip WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="CarTip">
+    	<![CDATA[ 
+    		INSERT INTO car_tip(title,content,category_id,image,org_id,org_code,group_id,ctime,status,cuser_id,auser_id,checktime,check_reason,click_num,push_num,auser_name,cuser_name,publish_criterias,discard_user_id,discard_time,wcx_click_nums,publish_channel) VALUES (#{title},#{content},#{categoryId},#{image},#{orgId},#{orgCode},#{groupId},#{ctime},#{status},#{cuserId},#{auserId},#{checktime},#{checkReason},#{clickNum},#{pushNum},#{auserName},#{cuserName},#{publishCriterias},#{discardUserId},#{discardTime},#{wcxClickNums},#{publishChannel})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE car_tip SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="CarTip">
+		<![CDATA[ 
+			UPDATE car_tip SET title = #{title},content = #{content},category_id = #{categoryId},image = #{image},org_id = #{orgId},org_code = #{orgCode},group_id = #{groupId},ctime = #{ctime},status = #{status},cuser_id = #{cuserId},auser_id = #{auserId},checktime = #{checktime},check_reason = #{checkReason},click_num = #{clickNum},push_num = #{pushNum},auser_name = #{auserName},cuser_name = #{cuserName},publish_criterias = #{publishCriterias},discard_user_id = #{discardUserId},discard_time = #{discardTime},wcx_click_nums = #{wcxClickNums},publish_channel = #{publishChannel} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="CarTip">
+		<![CDATA[ 
+    		DELETE FROM car_tip WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM car_tip WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM car_tip WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

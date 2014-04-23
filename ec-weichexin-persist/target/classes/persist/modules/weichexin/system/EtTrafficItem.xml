@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.EtTrafficItemDao">  
+    
+    <resultMap type="EtTrafficItem" id="EtTrafficItemResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="carId" column="car_id"/>
+		<result 	property="carNo" column="car_no"/>
+		<result 	property="no" column="no"/>
+		<result 	property="day" column="day"/>
+		<result 	property="trafficTime" column="traffic_time"/>
+		<result 	property="address" column="address"/>
+		<result 	property="item" column="item"/>
+		<result 	property="money" column="money"/>
+		<result 	property="unit" column="unit"/>
+		<result 	property="isValid" column="is_valid"/>
+		<result 	property="points" column="points"/>
+		<result 	property="createdTime" column="created_time"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EtTrafficItem" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM et_traffic_item WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EtTrafficItem" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM et_traffic_item WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EtTrafficItem" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM et_traffic_item WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EtTrafficItem" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM et_traffic_item WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM et_traffic_item WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EtTrafficItem" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM et_traffic_item        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EtTrafficItem" resultMap="EtTrafficItemResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM et_traffic_item WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM et_traffic_item WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EtTrafficItem">
+    	<![CDATA[ 
+    		INSERT INTO et_traffic_item(car_id,car_no,no,day,traffic_time,address,item,money,unit,is_valid,points,created_time) VALUES (#{carId},#{carNo},#{no},#{day},#{trafficTime},#{address},#{item},#{money},#{unit},#{isValid},#{points},#{createdTime})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE et_traffic_item SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EtTrafficItem">
+		<![CDATA[ 
+			UPDATE et_traffic_item SET car_id = #{carId},car_no = #{carNo},no = #{no},day = #{day},traffic_time = #{trafficTime},address = #{address},item = #{item},money = #{money},unit = #{unit},is_valid = #{isValid},points = #{points},created_time = #{createdTime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EtTrafficItem">
+		<![CDATA[ 
+    		DELETE FROM et_traffic_item WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM et_traffic_item WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM et_traffic_item WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

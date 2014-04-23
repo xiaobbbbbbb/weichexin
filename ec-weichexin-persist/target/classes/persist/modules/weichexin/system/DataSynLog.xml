@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.DataSynLogDao">  
+    
+    <resultMap type="DataSynLog" id="DataSynLogResultMap">  
+		<id 		property="synTable" column="syn_table"/>
+		<result 	property="synTime" column="syn_time"/>
+		<result 	property="updated" column="updated"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="DataSynLog" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM data_syn_log WHERE syn_table = #{synTable}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="DataSynLog" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM data_syn_log WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="DataSynLog" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM data_syn_log WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="DataSynLog" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM data_syn_log WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM data_syn_log WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="DataSynLog" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM data_syn_log        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="DataSynLog" resultMap="DataSynLogResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM data_syn_log WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(syn_table) FROM data_syn_log WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="DataSynLog">
+    	<![CDATA[ 
+    		INSERT INTO data_syn_log(syn_table,syn_time,updated) VALUES (#{synTable},#{synTime},#{updated})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE data_syn_log SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="DataSynLog">
+		<![CDATA[ 
+			UPDATE data_syn_log SET syn_table = #{synTable},syn_time = #{synTime},updated = #{updated} WHERE syn_table = #{synTable}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="DataSynLog">
+		<![CDATA[ 
+    		DELETE FROM data_syn_log WHERE syn_table = #{synTable}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="String">
+		<![CDATA[ 
+    		DELETE FROM data_syn_log WHERE syn_table = #{synTable}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM data_syn_log WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

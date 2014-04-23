@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.UserGindexDao">  
+    
+    <resultMap type="UserGindex" id="UserGindexResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="carId" column="car_id"/>
+		<result 	property="carNo" column="car_no"/>
+		<result 	property="email" column="email"/>
+		<result 	property="carType" column="car_type"/>
+		<result 	property="pailiang" column="pailiang"/>
+		<result 	property="oilType" column="oil_type"/>
+		<result 	property="userAttr" column="user_attr"/>
+		<result 	property="driveNum" column="drive_num"/>
+		<result 	property="totalDriveTime" column="total_drive_time"/>
+		<result 	property="totalMileage" column="total_mileage"/>
+		<result 	property="totalOilSize" column="total_oil_size"/>
+		<result 	property="totalOilMoney" column="total_oil_money"/>
+		<result 	property="totalCarbonSize" column="total_carbon_size"/>
+		<result 	property="totalCarbonMoney" column="total_carbon_money"/>
+		<result 	property="avgSpeed" column="avg_speed"/>
+		<result 	property="dayAvgOil" column="day_avg_oil"/>
+		<result 	property="createTime" column="create_time"/>
+		<result 	property="dayAvgCarbon" column="day_avg_carbon"/>
+		<result 	property="dayCarbonMoney" column="day_carbon_money"/>
+		<result 	property="clientDay" column="client_day"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="UserGindex" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM user_gindex WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="UserGindex" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM user_gindex WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="UserGindex" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM user_gindex WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="UserGindex" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM user_gindex WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM user_gindex WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="UserGindex" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM user_gindex        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="UserGindex" resultMap="UserGindexResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM user_gindex WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM user_gindex WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="UserGindex">
+    	<![CDATA[ 
+    		INSERT INTO user_gindex(car_id,car_no,email,car_type,pailiang,oil_type,user_attr,drive_num,total_drive_time,total_mileage,total_oil_size,total_oil_money,total_carbon_size,total_carbon_money,avg_speed,day_avg_oil,create_time,day_avg_carbon,day_carbon_money,client_day) VALUES (#{carId},#{carNo},#{email},#{carType},#{pailiang},#{oilType},#{userAttr},#{driveNum},#{totalDriveTime},#{totalMileage},#{totalOilSize},#{totalOilMoney},#{totalCarbonSize},#{totalCarbonMoney},#{avgSpeed},#{dayAvgOil},#{createTime},#{dayAvgCarbon},#{dayCarbonMoney},#{clientDay})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE user_gindex SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="UserGindex">
+		<![CDATA[ 
+			UPDATE user_gindex SET car_id = #{carId},car_no = #{carNo},email = #{email},car_type = #{carType},pailiang = #{pailiang},oil_type = #{oilType},user_attr = #{userAttr},drive_num = #{driveNum},total_drive_time = #{totalDriveTime},total_mileage = #{totalMileage},total_oil_size = #{totalOilSize},total_oil_money = #{totalOilMoney},total_carbon_size = #{totalCarbonSize},total_carbon_money = #{totalCarbonMoney},avg_speed = #{avgSpeed},day_avg_oil = #{dayAvgOil},create_time = #{createTime},day_avg_carbon = #{dayAvgCarbon},day_carbon_money = #{dayCarbonMoney},client_day = #{clientDay} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="UserGindex">
+		<![CDATA[ 
+    		DELETE FROM user_gindex WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM user_gindex WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM user_gindex WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

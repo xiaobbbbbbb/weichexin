@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.TipPublishCriteriaDao">  
+    
+    <resultMap type="TipPublishCriteria" id="TipPublishCriteriaResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="tipId" column="tip_id"/>
+		<result 	property="currentMileageBegin" column="current_mileage_begin"/>
+		<result 	property="currentMileageEnd" column="current_mileage_end"/>
+		<result 	property="modelId" column="model_id"/>
+		<result 	property="orgId" column="org_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="TipPublishCriteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_publish_criteria WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="TipPublishCriteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_publish_criteria WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="TipPublishCriteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_publish_criteria WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="TipPublishCriteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM tip_publish_criteria WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM tip_publish_criteria WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="TipPublishCriteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_publish_criteria        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="TipPublishCriteria" resultMap="TipPublishCriteriaResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM tip_publish_criteria WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM tip_publish_criteria WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="TipPublishCriteria">
+    	<![CDATA[ 
+    		INSERT INTO tip_publish_criteria(tip_id,current_mileage_begin,current_mileage_end,model_id,org_id) VALUES (#{tipId},#{currentMileageBegin},#{currentMileageEnd},#{modelId},#{orgId})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE tip_publish_criteria SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="TipPublishCriteria">
+		<![CDATA[ 
+			UPDATE tip_publish_criteria SET tip_id = #{tipId},current_mileage_begin = #{currentMileageBegin},current_mileage_end = #{currentMileageEnd},model_id = #{modelId},org_id = #{orgId} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="TipPublishCriteria">
+		<![CDATA[ 
+    		DELETE FROM tip_publish_criteria WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM tip_publish_criteria WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM tip_publish_criteria WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

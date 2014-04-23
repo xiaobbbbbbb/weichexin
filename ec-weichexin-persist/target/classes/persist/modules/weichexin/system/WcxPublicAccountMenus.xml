@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.WcxPublicAccountMenusDao">  
+    
+    <resultMap type="WcxPublicAccountMenus" id="WcxPublicAccountMenusResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="accountId" column="account_id"/>
+		<result 	property="menuId" column="menu_id"/>
+		<result 	property="selected" column="selected"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="WcxPublicAccountMenus" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_public_account_menus WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="WcxPublicAccountMenus" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_public_account_menus WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="WcxPublicAccountMenus" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_public_account_menus WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WcxPublicAccountMenus" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM wcx_public_account_menus WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM wcx_public_account_menus WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="WcxPublicAccountMenus" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_public_account_menus        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WcxPublicAccountMenus" resultMap="WcxPublicAccountMenusResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM wcx_public_account_menus WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM wcx_public_account_menus WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="WcxPublicAccountMenus">
+    	<![CDATA[ 
+    		INSERT INTO wcx_public_account_menus(account_id,menu_id,selected) VALUES (#{accountId},#{menuId},#{selected})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE wcx_public_account_menus SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="WcxPublicAccountMenus">
+		<![CDATA[ 
+			UPDATE wcx_public_account_menus SET account_id = #{accountId},menu_id = #{menuId},selected = #{selected} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="WcxPublicAccountMenus">
+		<![CDATA[ 
+    		DELETE FROM wcx_public_account_menus WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM wcx_public_account_menus WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM wcx_public_account_menus WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

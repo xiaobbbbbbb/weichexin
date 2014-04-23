@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.TipCarsDao">  
+    
+    <resultMap type="TipCars" id="TipCarsResultMap">  
+		<id 		property="tipId" column="tip_id"/>
+		<id 		property="carId" column="car_id"/>
+		<result 	property="orgId" column="org_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="TipCars" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_cars WHERE car_id = #{carId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="TipCars" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_cars WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="TipCars" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_cars WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="TipCars" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM tip_cars WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM tip_cars WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="TipCars" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM tip_cars        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="TipCars" resultMap="TipCarsResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM tip_cars WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(car_id) FROM tip_cars WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="TipCars">
+    	<![CDATA[ 
+    		INSERT INTO tip_cars(tip_id,car_id,org_id) VALUES (#{tipId},#{carId},#{orgId})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE tip_cars SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="TipCars">
+		<![CDATA[ 
+			UPDATE tip_cars SET tip_id = #{tipId},car_id = #{carId},org_id = #{orgId} WHERE car_id = #{carId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="TipCars">
+		<![CDATA[ 
+    		DELETE FROM tip_cars WHERE car_id = #{carId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM tip_cars WHERE car_id = #{carId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM tip_cars WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

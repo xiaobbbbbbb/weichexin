@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.FaultCodeDao">  
+    
+    <resultMap type="FaultCode" id="FaultCodeResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="code" column="code"/>
+		<result 	property="system" column="system"/>
+		<result 	property="summary" column="summary"/>
+		<result 	property="masterType" column="master_type"/>
+		<result 	property="typeId" column="type_id"/>
+		<result 	property="typeName" column="type_name"/>
+		<result 	property="grade" column="grade"/>
+		<result 	property="isdisabled" column="isdisabled"/>
+		<result 	property="updateTime" column="update_time"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="FaultCode" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="FaultCode" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="FaultCode" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FaultCode" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM fault_code WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM fault_code WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="FaultCode" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fault_code        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FaultCode" resultMap="FaultCodeResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM fault_code WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM fault_code WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="FaultCode">
+    	<![CDATA[ 
+    		INSERT INTO fault_code(code,system,summary,master_type,type_id,type_name,grade,isdisabled,update_time) VALUES (#{code},#{system},#{summary},#{masterType},#{typeId},#{typeName},#{grade},#{isdisabled},#{updateTime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE fault_code SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="FaultCode">
+		<![CDATA[ 
+			UPDATE fault_code SET code = #{code},system = #{system},summary = #{summary},master_type = #{masterType},type_id = #{typeId},type_name = #{typeName},grade = #{grade},isdisabled = #{isdisabled},update_time = #{updateTime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="FaultCode">
+		<![CDATA[ 
+    		DELETE FROM fault_code WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM fault_code WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM fault_code WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

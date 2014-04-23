@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.WcxShowCarModelsDao">  
+    
+    <resultMap type="WcxShowCarModels" id="WcxShowCarModelsResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="orgId" column="org_id"/>
+		<result 	property="modelId" column="model_id"/>
+		<result 	property="refPrice" column="ref_price"/>
+		<result 	property="ourPrice" column="our_price"/>
+		<result 	property="colors" column="colors"/>
+		<result 	property="isTop" column="is_top"/>
+		<result 	property="topTime" column="top_time"/>
+		<result 	property="comment" column="comment"/>
+		<result 	property="pubTime" column="pub_time"/>
+		<result 	property="checkTime" column="check_time"/>
+		<result 	property="discardTime" column="discard_time"/>
+		<result 	property="checkComment" column="check_comment"/>
+		<result 	property="discardComment" column="discard_comment"/>
+		<result 	property="pubUserId" column="pub_user_id"/>
+		<result 	property="checkUserId" column="check_user_id"/>
+		<result 	property="discardUserId" column="discard_user_id"/>
+		<result 	property="status" column="status"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="WcxShowCarModels" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_show_car_models WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="WcxShowCarModels" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_show_car_models WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="WcxShowCarModels" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_show_car_models WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WcxShowCarModels" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM wcx_show_car_models WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM wcx_show_car_models WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="WcxShowCarModels" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM wcx_show_car_models        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WcxShowCarModels" resultMap="WcxShowCarModelsResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM wcx_show_car_models WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM wcx_show_car_models WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="WcxShowCarModels">
+    	<![CDATA[ 
+    		INSERT INTO wcx_show_car_models(org_id,model_id,ref_price,our_price,colors,is_top,top_time,comment,pub_time,check_time,discard_time,check_comment,discard_comment,pub_user_id,check_user_id,discard_user_id,status) VALUES (#{orgId},#{modelId},#{refPrice},#{ourPrice},#{colors},#{isTop},#{topTime},#{comment},#{pubTime},#{checkTime},#{discardTime},#{checkComment},#{discardComment},#{pubUserId},#{checkUserId},#{discardUserId},#{status})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE wcx_show_car_models SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="WcxShowCarModels">
+		<![CDATA[ 
+			UPDATE wcx_show_car_models SET org_id = #{orgId},model_id = #{modelId},ref_price = #{refPrice},our_price = #{ourPrice},colors = #{colors},is_top = #{isTop},top_time = #{topTime},comment = #{comment},pub_time = #{pubTime},check_time = #{checkTime},discard_time = #{discardTime},check_comment = #{checkComment},discard_comment = #{discardComment},pub_user_id = #{pubUserId},check_user_id = #{checkUserId},discard_user_id = #{discardUserId},status = #{status} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="WcxShowCarModels">
+		<![CDATA[ 
+    		DELETE FROM wcx_show_car_models WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM wcx_show_car_models WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM wcx_show_car_models WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.ActivityDao">  
+    
+    <!-- 获取活动列表EX -->
+    <select id="findActivitysListEx"  resultType="Activity" resultMap="ActivityResultMap">  
+      <![CDATA[  
+		SELECT
+		    DISTINCT act.id, act.*
+	    FROM
+		    activity AS act,
+		    activity_publish_criteria_ex AS c
+	    WHERE
+	    	1=1	  
+	    AND 
+	        act.`status` = 2
+	    ]]>
+	    <if test="has_image == true">
+		    <![CDATA[  
+				AND 
+		       		act.`image` IS NOT NULL  
+		        AND 
+		        	act.`image` <>  '' 
+		    ]]>
+		</if>
+		<![CDATA[ 
+	    
+	    AND 
+	    	act.etime >= #{today}
+	    AND 
+	        act.id=c.act_id
+	    and act.publish_channel in (0,1,3 ) 
+	    and	act.org_code = #{org_code}
+	    ]]>
+	  	<if test="category_id != null">
+			AND act.category_id =#{category_id}
+		</if>
+		<![CDATA[  
+	    AND
+	    	( (c.m_begin IS NULL) or (c.m_begin='')   OR #{current_mileage} >= c.m_begin )
+	    AND
+	    	( (c.m_end IS NULL) or (c.m_end='') OR #{current_mileage} <= c.m_end )
+	    AND 
+	    	( 
+	    		(
+	    			(c.car_m_ids IS NULL or c.car_m_ids='' )     			
+	    			AND 
+	    			(
+		    				(
+		    					(c.car_s_ids IS NULL or c.car_s_ids='') AND ( (c.car_b_ids IS NULL or c.car_b_ids='') OR INSTR(c.car_b_ids, #{brand_id}) >0 )
+		    				)
+		    				OR ( INSTR(c.car_s_ids, #{serial_id}) >0 )
+	    			)
+	    		)  
+	    		OR 
+	    		( INSTR(c.car_m_ids, #{model_id}) >0 )
+	    	)
+	    ORDER BY
+	        act.is_top DESC,
+	        act.top_time DESC,
+		    act.ctime DESC
+		]]>  
+		<if test="limit != null">
+			LIMIT 0,#{limit}
+		</if>
+	    
+      	
+    </select>
+</mapper>  

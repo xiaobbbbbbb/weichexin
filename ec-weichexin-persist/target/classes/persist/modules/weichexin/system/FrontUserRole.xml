@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.FrontUserRoleDao">  
+    
+    <resultMap type="FrontUserRole" id="FrontUserRoleResultMap">  
+		<id 		property="userId" column="user_id"/>
+		<id 		property="roleId" column="role_id"/>
+		<result 	property="orgCode" column="org_code"/>
+		<result 	property="orgId" column="org_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="FrontUserRole" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM front_user_role WHERE role_id = #{roleId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="FrontUserRole" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM front_user_role WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="FrontUserRole" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM front_user_role WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FrontUserRole" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM front_user_role WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM front_user_role WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="FrontUserRole" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM front_user_role        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FrontUserRole" resultMap="FrontUserRoleResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM front_user_role WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(role_id) FROM front_user_role WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="FrontUserRole">
+    	<![CDATA[ 
+    		INSERT INTO front_user_role(user_id,role_id,org_code,org_id) VALUES (#{userId},#{roleId},#{orgCode},#{orgId})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE front_user_role SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="FrontUserRole">
+		<![CDATA[ 
+			UPDATE front_user_role SET user_id = #{userId},role_id = #{roleId},org_code = #{orgCode},org_id = #{orgId} WHERE role_id = #{roleId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="FrontUserRole">
+		<![CDATA[ 
+    		DELETE FROM front_user_role WHERE role_id = #{roleId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM front_user_role WHERE role_id = #{roleId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM front_user_role WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

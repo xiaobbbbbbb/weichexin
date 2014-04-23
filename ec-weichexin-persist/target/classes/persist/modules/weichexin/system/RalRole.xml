@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.RalRoleDao">  
+    
+    <resultMap type="RalRole" id="RalRoleResultMap">  
+		<id 		property="roleId" column="role_id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="message" column="message"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="RalRole" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_role WHERE role_id = #{roleId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="RalRole" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_role WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="RalRole" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_role WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="RalRole" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM ral_role WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM ral_role WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="RalRole" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_role        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="RalRole" resultMap="RalRoleResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM ral_role WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(role_id) FROM ral_role WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="RalRole">
+    	<![CDATA[ 
+    		INSERT INTO ral_role(name,message) VALUES (#{name},#{message})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="roleId">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE ral_role SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="RalRole">
+		<![CDATA[ 
+			UPDATE ral_role SET name = #{name},message = #{message} WHERE role_id = #{roleId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="RalRole">
+		<![CDATA[ 
+    		DELETE FROM ral_role WHERE role_id = #{roleId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM ral_role WHERE role_id = #{roleId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM ral_role WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

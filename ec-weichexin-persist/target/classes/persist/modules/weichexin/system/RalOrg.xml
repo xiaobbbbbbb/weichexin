@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.RalOrgDao">  
+    
+    <resultMap type="RalOrg" id="RalOrgResultMap">  
+		<id 		property="orgId" column="org_id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="parentId" column="parentId"/>
+		<result 	property="level" column="level"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="RalOrg" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_org WHERE org_id = #{orgId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="RalOrg" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_org WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="RalOrg" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_org WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="RalOrg" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM ral_org WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM ral_org WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="RalOrg" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_org        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="RalOrg" resultMap="RalOrgResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM ral_org WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(org_id) FROM ral_org WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="RalOrg">
+    	<![CDATA[ 
+    		INSERT INTO ral_org(name,parentId,level) VALUES (#{name},#{parentId},#{level})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="orgId">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE ral_org SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="RalOrg">
+		<![CDATA[ 
+			UPDATE ral_org SET name = #{name},parentId = #{parentId},level = #{level} WHERE org_id = #{orgId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="RalOrg">
+		<![CDATA[ 
+    		DELETE FROM ral_org WHERE org_id = #{orgId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM ral_org WHERE org_id = #{orgId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM ral_org WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

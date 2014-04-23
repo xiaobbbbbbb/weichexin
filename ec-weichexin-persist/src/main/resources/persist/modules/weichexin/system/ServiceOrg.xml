@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.ServiceOrgDao">  
+    
+    <resultMap type="ServiceOrg" id="ServiceOrgResultMap">  
+		<id 		property="sid" column="sid"/>
+		<result 	property="code" column="code"/>
+		<result 	property="brands" column="brands"/>
+		<result 	property="name" column="name"/>
+		<result 	property="groupId" column="group_id"/>
+		<result 	property="groupCode" column="group_code"/>
+		<result 	property="logo" column="logo"/>
+		<result 	property="address" column="address"/>
+		<result 	property="tel" column="tel"/>
+		<result 	property="ctime" column="ctime"/>
+		<result 	property="mark" column="mark"/>
+		<result 	property="startTime" column="start_time"/>
+		<result 	property="endTime" column="end_time"/>
+		<result 	property="isValid" column="is_valid"/>
+		<result 	property="delFlag" column="delFlag"/>
+		<result 	property="activityPublishMonth" column="activity_publish_month"/>
+		<result 	property="activityPublishNum" column="activity_publish_num"/>
+		<result 	property="activityPublishMaxNum" column="activity_publish_max_num"/>
+		<result 	property="updateTime" column="update_time"/>
+		<result 	property="telForComplaint" column="tel_for_complaint"/>
+		<result 	property="telForMaintenance" column="tel_for_maintenance"/>
+		<result 	property="telForSales" column="tel_for_sales"/>
+		<result 	property="renewInsureTel" column="renew_insure_tel"/>
+		<result 	property="usedCarServeTel" column="used_car_serve_tel"/>
+		<result 	property="yearCheckServeTel" column="year_check_serve_tel"/>
+		<result 	property="helpTel" column="help_tel"/>
+		<result 	property="reserveAvailableDays" column="reserve_available_days"/>
+		<result 	property="reserveDiscountNote" column="reserve_discount_note"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="ServiceOrg" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM service_org WHERE sid = #{sid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="ServiceOrg" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM service_org WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="ServiceOrg" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM service_org WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ServiceOrg" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM service_org WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM service_org WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="ServiceOrg" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM service_org        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ServiceOrg" resultMap="ServiceOrgResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM service_org WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(sid) FROM service_org WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="ServiceOrg">
+    	<![CDATA[ 
+    		INSERT INTO service_org(code,brands,name,group_id,group_code,logo,address,tel,ctime,mark,start_time,end_time,is_valid,delFlag,activity_publish_month,activity_publish_num,activity_publish_max_num,update_time,tel_for_complaint,tel_for_maintenance,tel_for_sales,renew_insure_tel,used_car_serve_tel,year_check_serve_tel,help_tel,reserve_available_days,reserve_discount_note) VALUES (#{code},#{brands},#{name},#{groupId},#{groupCode},#{logo},#{address},#{tel},#{ctime},#{mark},#{startTime},#{endTime},#{isValid},#{delFlag},#{activityPublishMonth},#{activityPublishNum},#{activityPublishMaxNum},#{updateTime},#{telForComplaint},#{telForMaintenance},#{telForSales},#{renewInsureTel},#{usedCarServeTel},#{yearCheckServeTel},#{helpTel},#{reserveAvailableDays},#{reserveDiscountNote})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="sid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE service_org SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="ServiceOrg">
+		<![CDATA[ 
+			UPDATE service_org SET code = #{code},brands = #{brands},name = #{name},group_id = #{groupId},group_code = #{groupCode},logo = #{logo},address = #{address},tel = #{tel},ctime = #{ctime},mark = #{mark},start_time = #{startTime},end_time = #{endTime},is_valid = #{isValid},delFlag = #{delFlag},activity_publish_month = #{activityPublishMonth},activity_publish_num = #{activityPublishNum},activity_publish_max_num = #{activityPublishMaxNum},update_time = #{updateTime},tel_for_complaint = #{telForComplaint},tel_for_maintenance = #{telForMaintenance},tel_for_sales = #{telForSales},renew_insure_tel = #{renewInsureTel},used_car_serve_tel = #{usedCarServeTel},year_check_serve_tel = #{yearCheckServeTel},help_tel = #{helpTel},reserve_available_days = #{reserveAvailableDays},reserve_discount_note = #{reserveDiscountNote} WHERE sid = #{sid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="ServiceOrg">
+		<![CDATA[ 
+    		DELETE FROM service_org WHERE sid = #{sid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM service_org WHERE sid = #{sid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM service_org WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

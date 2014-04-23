@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.RalDepartmentDao">  
+    
+    <resultMap type="RalDepartment" id="RalDepartmentResultMap">  
+		<id 		property="depId" column="dep_id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="isLeaf" column="isLeaf"/>
+		<result 	property="parentId" column="parentId"/>
+		<result 	property="orders" column="orders"/>
+		<result 	property="message" column="message"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="RalDepartment" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_department WHERE dep_id = #{depId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="RalDepartment" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_department WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="RalDepartment" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_department WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="RalDepartment" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM ral_department WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM ral_department WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="RalDepartment" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM ral_department        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="RalDepartment" resultMap="RalDepartmentResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM ral_department WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(dep_id) FROM ral_department WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="RalDepartment">
+    	<![CDATA[ 
+    		INSERT INTO ral_department(name,isLeaf,parentId,orders,message) VALUES (#{name},#{isLeaf},#{parentId},#{orders},#{message})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="depId">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE ral_department SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="RalDepartment">
+		<![CDATA[ 
+			UPDATE ral_department SET name = #{name},isLeaf = #{isLeaf},parentId = #{parentId},orders = #{orders},message = #{message} WHERE dep_id = #{depId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="RalDepartment">
+		<![CDATA[ 
+    		DELETE FROM ral_department WHERE dep_id = #{depId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM ral_department WHERE dep_id = #{depId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM ral_department WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

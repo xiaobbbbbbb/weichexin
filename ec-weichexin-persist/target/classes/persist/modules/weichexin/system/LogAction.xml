@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.LogActionDao">  
+    
+    <resultMap type="LogAction" id="LogActionResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="sid" column="sid"/>
+		<result 	property="type" column="type"/>
+		<result 	property="ctime" column="ctime"/>
+		<result 	property="loginTime" column="login_time"/>
+		<result 	property="outTime" column="out_time"/>
+		<result 	property="userId" column="user_id"/>
+		<result 	property="ip" column="ip"/>
+		<result 	property="groupId" column="group_id"/>
+		<result 	property="groupCode" column="group_code"/>
+		<result 	property="orgId" column="org_id"/>
+		<result 	property="orgCode" column="org_code"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="LogAction" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM log_action WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="LogAction" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM log_action WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="LogAction" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM log_action WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="LogAction" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM log_action WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM log_action WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="LogAction" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM log_action        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="LogAction" resultMap="LogActionResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM log_action WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM log_action WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="LogAction">
+    	<![CDATA[ 
+    		INSERT INTO log_action(sid,type,ctime,login_time,out_time,user_id,ip,group_id,group_code,org_id,org_code) VALUES (#{sid},#{type},#{ctime},#{loginTime},#{outTime},#{userId},#{ip},#{groupId},#{groupCode},#{orgId},#{orgCode})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE log_action SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="LogAction">
+		<![CDATA[ 
+			UPDATE log_action SET sid = #{sid},type = #{type},ctime = #{ctime},login_time = #{loginTime},out_time = #{outTime},user_id = #{userId},ip = #{ip},group_id = #{groupId},group_code = #{groupCode},org_id = #{orgId},org_code = #{orgCode} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="LogAction">
+		<![CDATA[ 
+    		DELETE FROM log_action WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM log_action WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM log_action WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

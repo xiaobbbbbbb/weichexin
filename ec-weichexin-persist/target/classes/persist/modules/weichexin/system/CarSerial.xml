@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.CarSerialDao">  
+    
+    <resultMap type="CarSerial" id="CarSerialResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="groupId" column="group_id"/>
+		<result 	property="groupName" column="group_name"/>
+		<result 	property="code" column="code"/>
+		<result 	property="brandId" column="brand_id"/>
+		<result 	property="brandName" column="brand_name"/>
+		<result 	property="url" column="url"/>
+		<result 	property="disabled" column="disabled"/>
+		<result 	property="changeRate" column="change_rate"/>
+		<result 	property="version" column="version"/>
+		<result 	property="isNew" column="is_new"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="CarSerial" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_serial WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="CarSerial" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_serial WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="CarSerial" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_serial WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="CarSerial" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM car_serial WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM car_serial WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="CarSerial" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM car_serial        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="CarSerial" resultMap="CarSerialResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM car_serial WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM car_serial WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="CarSerial">
+    	<![CDATA[ 
+    		INSERT INTO car_serial(name,group_id,group_name,code,brand_id,brand_name,url,disabled,change_rate,version,is_new) VALUES (#{name},#{groupId},#{groupName},#{code},#{brandId},#{brandName},#{url},#{disabled},#{changeRate},#{version},#{isNew})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE car_serial SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="CarSerial">
+		<![CDATA[ 
+			UPDATE car_serial SET name = #{name},group_id = #{groupId},group_name = #{groupName},code = #{code},brand_id = #{brandId},brand_name = #{brandName},url = #{url},disabled = #{disabled},change_rate = #{changeRate},version = #{version},is_new = #{isNew} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="CarSerial">
+		<![CDATA[ 
+    		DELETE FROM car_serial WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM car_serial WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM car_serial WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.FivesaasCarInfoImprotDao">  
+    
+    <resultMap type="FivesaasCarInfoImprot" id="FivesaasCarInfoImprotResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="userId" column="user_id"/>
+		<result 	property="userName" column="user_name"/>
+		<result 	property="carInfoTempRealId" column="car_info_temp_real_id"/>
+		<result 	property="ctime" column="ctime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="FivesaasCarInfoImprot" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fivesaas_car_info_improt WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="FivesaasCarInfoImprot" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fivesaas_car_info_improt WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="FivesaasCarInfoImprot" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fivesaas_car_info_improt WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FivesaasCarInfoImprot" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM fivesaas_car_info_improt WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM fivesaas_car_info_improt WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="FivesaasCarInfoImprot" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM fivesaas_car_info_improt        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="FivesaasCarInfoImprot" resultMap="FivesaasCarInfoImprotResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM fivesaas_car_info_improt WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM fivesaas_car_info_improt WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="FivesaasCarInfoImprot">
+    	<![CDATA[ 
+    		INSERT INTO fivesaas_car_info_improt(user_id,user_name,car_info_temp_real_id,ctime) VALUES (#{userId},#{userName},#{carInfoTempRealId},#{ctime})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE fivesaas_car_info_improt SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="FivesaasCarInfoImprot">
+		<![CDATA[ 
+			UPDATE fivesaas_car_info_improt SET user_id = #{userId},user_name = #{userName},car_info_temp_real_id = #{carInfoTempRealId},ctime = #{ctime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="FivesaasCarInfoImprot">
+		<![CDATA[ 
+    		DELETE FROM fivesaas_car_info_improt WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM fivesaas_car_info_improt WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM fivesaas_car_info_improt WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

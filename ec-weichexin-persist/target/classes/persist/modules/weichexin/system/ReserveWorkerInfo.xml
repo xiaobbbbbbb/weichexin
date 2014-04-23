@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.weichexin.dao.ReserveWorkerInfoDao">  
+    
+    <resultMap type="ReserveWorkerInfo" id="ReserveWorkerInfoResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="wcxUserId" column="wcx_user_id"/>
+		<result 	property="workerId" column="worker_id"/>
+		<result 	property="ctime" column="ctime"/>
+		<result 	property="timePoint" column="time_point"/>
+		<result 	property="carNo" column="car_no"/>
+		<result 	property="contactTel" column="contact_tel"/>
+		<result 	property="discountNote" column="discount_note"/>
+		<result 	property="practicalWorkerId" column="practical_worker_id"/>
+		<result 	property="practicalTimePoint" column="practical_time_point"/>
+		<result 	property="practicalCarNo" column="practical_car_no"/>
+		<result 	property="status" column="status"/>
+		<result 	property="handleUserId" column="handle_user_id"/>
+		<result 	property="handleTime" column="handle_time"/>
+		<result 	property="reserveDate" column="reserve_date"/>
+		<result 	property="orgContactTel" column="org_contact_tel"/>
+		<result 	property="orgCode" column="org_code"/>
+		<result 	property="orgId" column="org_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="ReserveWorkerInfo" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM reserve_worker_info WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="ReserveWorkerInfo" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM reserve_worker_info WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="ReserveWorkerInfo" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM reserve_worker_info WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ReserveWorkerInfo" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM reserve_worker_info WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM reserve_worker_info WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="ReserveWorkerInfo" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM reserve_worker_info        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ReserveWorkerInfo" resultMap="ReserveWorkerInfoResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM reserve_worker_info WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM reserve_worker_info WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="ReserveWorkerInfo">
+    	<![CDATA[ 
+    		INSERT INTO reserve_worker_info(wcx_user_id,worker_id,ctime,time_point,car_no,contact_tel,discount_note,practical_worker_id,practical_time_point,practical_car_no,status,handle_user_id,handle_time,reserve_date,org_contact_tel,org_code,org_id) VALUES (#{wcxUserId},#{workerId},#{ctime},#{timePoint},#{carNo},#{contactTel},#{discountNote},#{practicalWorkerId},#{practicalTimePoint},#{practicalCarNo},#{status},#{handleUserId},#{handleTime},#{reserveDate},#{orgContactTel},#{orgCode},#{orgId})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE reserve_worker_info SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="ReserveWorkerInfo">
+		<![CDATA[ 
+			UPDATE reserve_worker_info SET wcx_user_id = #{wcxUserId},worker_id = #{workerId},ctime = #{ctime},time_point = #{timePoint},car_no = #{carNo},contact_tel = #{contactTel},discount_note = #{discountNote},practical_worker_id = #{practicalWorkerId},practical_time_point = #{practicalTimePoint},practical_car_no = #{practicalCarNo},status = #{status},handle_user_id = #{handleUserId},handle_time = #{handleTime},reserve_date = #{reserveDate},org_contact_tel = #{orgContactTel},org_code = #{orgCode},org_id = #{orgId} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="ReserveWorkerInfo">
+		<![CDATA[ 
+    		DELETE FROM reserve_worker_info WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM reserve_worker_info WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM reserve_worker_info WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  
